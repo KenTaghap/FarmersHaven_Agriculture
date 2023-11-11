@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Buy Crops</title>
+
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <!--slick slider stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+  <!-- slick slider -->
+
+  <link rel="stylesheet" href="css/slick-theme.css" />
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+
+</head>
+
+<body class="sub_page">
+
+  <div class="main_body_content">
+
+    <div class="hero_area">
+      <!-- header section strats -->
+      <header class="header_section">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <a class="navbar-brand" href="#">
+              farmers haven
+            </a>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class=""> </span>
+            </button>
+
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item ">
+                  <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"> Buy Crops</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../../api/cart.php">Cart</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../../api/myAcc/index.php">My Account</a>
+                </li>
+				<li class="nav-item">
+                  <a class="nav-link" href="../about.html">About Us</a>
+                </li>
+				<li class="nav-item">
+                  <a class="nav-link" href="../../VendorsLogin.html">Logout</a>
+                </li>
+              </ul>
+             
+            </div>
+          </nav>
+        </div>
+      </header>
+      <!-- end header section -->
+    </div>
+
+    <!-- chocolate section -->
+   
+    <section class="chocolate_section layout_padding">
+      <div class="container">
+        <div class="heading_container">
+          <h2>
+            Farmers haven products
+          </h2>
+          
+        </div>
+      </div>
+
+      <form action="../../api/updateproducts.php" method="POST">
+	   <center>
+      <h4 style="color:black;">Hello,<br><input type="text" name="Username"
+          id="Username" class="input-text" readonly></h4>
+          <script>
+// Retrieve the name from localStorage
+var name = localStorage.getItem("Username");
+
+// Display the name on page2.html
+if (name) {
+document.getElementById("Username").value = name;
+}
+</script>
+  </center>
+      <div class="container">
+        <div class="chocolate_container">
+          <div class="box">
+            <div class="img-box">
+              <img src="images/palay.jpg" alt="">
+            </div>
+            <div class="detail-box">
+              <h6>
+                Palay
+              </h6>
+              
+              <h5>
+                ₱100
+              </h5>
+              <br>
+              <p>Quantity</p>
+              <input type="number" value="0" min="0" id="palay" name="palay"/>  
+              <br>
+              <br>
+              
+             
+            </div>
+          </div>
+          <div class="box">
+            <div class="img-box">
+              <img src="images/tubo.jpg" alt="">
+            </div>
+            <div class="detail-box">
+              <h6>
+                Tubo
+              </h6>
+              <h5>
+                ₱200
+              </h5>
+              <br>
+              <p>Quantity</p>
+              <input type="number" value="0" min="0" id="tubo" name="tubo"/>  
+              <br>
+              <br>
+         
+            </div>
+          </div>
+          <div class="box">
+            <div class="img-box">
+              <img src="images/carrots.jpg" alt="">
+            </div>
+            <div class="detail-box">
+              <h6>
+                Carrots
+              </h6>
+              <h5>
+                ₱300
+              </h5>
+              <br>
+              <p>Quantity</p>
+              <input type="number" value="0" min="0" id="carrots" name="carrots"/>  
+              <br>
+              <br>
+          
+            </div>
+          </div>
+          
+        
+          
+       
+
+        </div>
+      </div>
+    </section>
+    <center>
+    <input type="submit" value="add to cart">
+  </center>
+  </form>
+  <br>
+  <br>
+   
+    <!-- end chocolate section -->
+
+    <!-- info section -->
+  
+
+    <!-- end info_section -->
+
+  </div>
+<center>
+	<a type="button" href="../../api/cart.php">Goto Cart</a>
+</center>
+  <!-- footer section -->
+  <footer class="container-fluid footer_section">
+    <div class="container">
+      <div class="col-md-11 col-lg-8 mx-auto">
+        <p>
+          &copy; <span id="displayYear"></span> Farmershaven
+          <a href="#">Products</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+  <!-- footer section -->
+
+  <!-- jQery -->
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="js/bootstrap.js"></script>
+  <!-- slick slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
+  <!-- custom js -->
+  <script src="js/custom.js"></script>
+
+</body>
+
+</html>
