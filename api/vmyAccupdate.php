@@ -53,18 +53,18 @@ try {
         if ($result->getModifiedCount() > 0) {
             $errorMsg = "Document updated successfully.";
             $errorMsg = $POST['new'];
-            header("Location: index.php");
+            header("Location: vmyAccindex.php");
             
             
         } else {
             $errorMsg = "Document not updated.";
             $errorMsg = $POST['new'];
-            header("Location: index.php");
+            header("Location: vmyAccindex.php");
         }
     } else {
         $errorMsg = "Please submit the form to update user information.";
         $errorMsg = $POST['new'];
-        header("Location: index.php");
+        header("Location: vmyAccindex.php");
         
     }
 } catch (MongoDB\Driver\Exception\Exception $e) {
