@@ -87,7 +87,7 @@ try {
 					</div>
 				</div>
 				
-				<form class="form-detail" action="myAccindex.php" method="POST">
+				<form class="form-detail" action="vmyAccindex.php" method="POST">
 				<center>
 				<h4 style="color:white;">You can Edit your personal Info,&nbsp; &nbsp;
 				<input type="text" name="Username" id="Username"  readonly></h4>
@@ -146,7 +146,7 @@ try {
 					</div>
 				
 					
-				<form class="form-detail" action="myAccupdate.php" method="POST">
+				<form class="form-detail" action="vmyAccupdate.php" method="POST">
 					<div class="tabcontent" id="sign-in">
 								<input placeholder="Fullname" value="<?= $userFullname ?>" type="text" name="Fullname" id="Fullname" class="input-text" required >
 								<input placeholder="Address" value="<?= $userAddress ?>" type="text" name="Address" id="Address" class="input-text" required>
