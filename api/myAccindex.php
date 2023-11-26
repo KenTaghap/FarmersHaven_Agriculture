@@ -1,63 +1,58 @@
 <?php
 require 'vendor/autoload.php';
 
-error_reporting(E_ERROR | E_PARSE);
-
 use MongoDB\Client;
 
 // Replace with your MongoDB Atlas connection string
 $connectionString = "mongodb://kenUser:KenPassword@ac-kvsfcpt-shard-00-00.qrj9egp.mongodb.net:27017,ac-kvsfcpt-shard-00-01.qrj9egp.mongodb.net:27017,ac-kvsfcpt-shard-00-02.qrj9egp.mongodb.net:27017/Agriculture?ssl=true&replicaSet=atlas-4pn5vh-shard-0&authSource=admin&retryWrites=true&w=majority";
 
+$userFullname = "";
+$userAddress = "";
+$userUsername = "";
+$userPassword = "";
+$userGender = "";
+$userBirthday = "";
+$userContactNum = "";
+$userEmail = "";
+$userImage = null;
+
 try {
     $client = new Client($connectionString);
     $collection = $client->Agriculture->Farmers; // Replace with your database and collection names
 
-    // Retrieve user information by name
-    $Username = $_POST['info'];
+    if (isset($_POST['Username'])) {
+        $Username = $_POST['Username'];
 
-    $filter = ['name' => $Username];
-    $userInfo = $collection->findOne($filter);
+        $filter = ['Username' => $Username];
+        $userInfo = $collection->findOne($filter);
 
-    if ($userInfo) {
-        $userFullname = $userInfo['Fullname'];
-        $userAddress = $userInfo['Address'];
-		$userUsername = $userInfo['Username'];
-        $userPassword = $userInfo['Password'];
-		$userGender = $userInfo['Gender'];
-		$userBirthday = $userInfo['Birthday'];
-		$userContactNum = $userInfo['ContactNum'];
-		$userEmail = $userInfo['Email'];
-        $userImage = $userInfo['File']; // Assuming 'image' is the field where the binary image data is stored
-        // Add other fields as needed
-
-	
+        if ($userInfo) {
+            $userFullname = $userInfo['Fullname'];
+            $userAddress = $userInfo['Address'];
+            $userUsername = $userInfo['Username'];
+            $userPassword = $userInfo['Password'];
+            $userGender = $userInfo['Gender'];
+            $userBirthday = $userInfo['Birthday'];
+            $userContactNum = $userInfo['ContactNum'];
+            $userEmail = $userInfo['Email'];
+            $userImage = $userInfo['File']; // Assuming 'File' is the field where the binary image data is stored
+            // Add other fields as needed
+        } else {
+            $userFullname = "User not found";
+            // Set other fields to default or empty values
+        }
     } else {
-        $userFullname = "User not found";
-        $userAddress = "";
-        $userUsername = "";
-		$userPassword = "";
-        $userGender = "";
-		$userBirthday = "";
-        $userContactNum = "";
-		$userEmail = "";
-
-        $userImage = null;
-        // Add other default values as needed
+        // Handle case where 'Username' is not set in $_POST
+        $userFullname = "Please Click Display Button.";
+        // Set other fields to default or empty values
     }
 } catch (MongoDB\Driver\Exception\Exception $e) {
-	$userFullname = "User not found";
-	$userAddress = "";
-	$userUsername = "";
-	$userPassword = "";
-	$userGender = "";
-	$userBirthday = "";
-	$userContactNum = "";
-	$userEmail = "";
-
-	$userImage = null;
-	// Add other default values as needed
+    // Handle MongoDB exceptions
+    $userFullname = "Error retrieving user information";
+    // Set other fields to default or empty values
 }
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -91,8 +86,11 @@ try {
 						<button class="tablinks" onclick="openCity(event, 'sign-in')">Modify</button>
 					</div>
 				</div>
+				
+				<form class="form-detail" action="myAccindex.php" method="POST">
 				<center>
-				<h4 style="color:white;">You can Edit your personal Info,&nbsp; &nbsp;<input type="text" name="Username" id="Username" class="input-text" readonly>.</h4>
+				<h4 style="color:white;">You can Edit your personal Info,&nbsp; &nbsp;
+				<input type="text" name="Username" id="Username"  readonly></h4>
 				<script>
 					// Retrieve the name from localStorage
 					var name = localStorage.getItem("Username");
@@ -103,7 +101,7 @@ try {
 					}
 				</script>
 				</center>
-				<form class="form-detail" action="myAccindex.php" method="POST">
+				
 					<div class="tabcontent" id="sign-up">
 					
 								<p><strong>Fullname:</strong>&nbsp; &nbsp;  <?= $userFullname ?></p>
@@ -114,7 +112,14 @@ try {
     							<p><strong>Birthday:</strong>&nbsp; &nbsp;  <?= $userBirthday ?></p>
 								<p><strong>Contact#:</strong>&nbsp; &nbsp;  <?= $userContactNum ?></p>
 								<p><strong>Email:</strong>&nbsp; &nbsp;  <?= $userEmail ?></p>
+
+
 								
+								<div class="form-row-last">
+					
+								<input type="submit" name="register" class="register" value="Display">
+						</div>
+								</form>
 								<br>
 								<br>
 								<br>
@@ -139,7 +144,7 @@ try {
 								
 						</div>
 					</div>
-				</form>
+				
 					
 				<form class="form-detail" action="myAccupdate.php" method="POST">
 					<div class="tabcontent" id="sign-in">
