@@ -126,7 +126,7 @@ try {
 								<br>
 								<br>
 						<div class="form-row-last">
-							<button><a href="../farmers/index.html" class="register">Back </a></button>
+							<button><a href="../vendors/index.html" class="register">Back </a></button>
 								<br>
 								<br>
 								<br>
