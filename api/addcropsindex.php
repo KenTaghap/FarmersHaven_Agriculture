@@ -87,8 +87,13 @@ if (isset($productFields[$Product])) {
 	</center>
 					</div>
 				</div>
-
-
+<div class="form-detail">
+				<div class="form-row">
+							<label class="form-row-inner" > 
+								<input placeholder="Barcode" id="product-name" oninput="showProduct()" type="text" name="product-name" class="input-text" required>
+							</label>
+						</div>
+						</div>
 				<form class="form-detail" action="addcropsindex.php" method="POST">
 					<center>
 				<img src="../farmers/addCrops/images/farmers heaven.jpg" alt="form" id="product-image">
@@ -120,11 +125,7 @@ if (isset($productFields[$Product])) {
 						</div>
 <br><br>
 
-						<div class="form-row">
-							<label class="form-row-inner">
-								<input placeholder="Barcode" id="product-name" oninput="showProduct()" type="text" name="product-name" class="input-text" required>
-							</label>
-						</div>
+					
 
 						<div class="form-row">
 							<label class="form-row-inner">
@@ -213,17 +214,17 @@ if (isset($productFields[$Product])) {
             
             // Define product data with image paths relative to the "images" folder
             var products = {
-                '11111': {
+                '11111115': {
                     'image': '../farmers/addCrops/images/palay.jpg',
                     'name': 'Palay',
 					'value': '100 php'
                 },
-                '22222': {
+                '22222220': {
                     'image': '../farmers/addCrops/images/tubo.jpg',
                     'name': 'Tubo',
 					'value': '200 php'
                 },
-                '33333': {
+                '33333335': {
                     'image': '../farmers/addCrops/images/carrots.jpg',
                     'name': 'Carrots',
 					'value': '300 php'
