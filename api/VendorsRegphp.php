@@ -1,6 +1,8 @@
 <?php
 require 'vendor/autoload.php';
 
+error_reporting(E_ERROR | E_PARSE);
+
 use MongoDB\BSON\Binary;
 use MongoDB\Client;
 
@@ -24,62 +26,70 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve user data from the form
     $Fullname = $_POST["Fullname"];
     $Filename = $_POST["Filename"];
-
-	$Address = $_POST["Address"];
-	$Username = $_POST["Username"];
+    $Address = $_POST["Address"];
+    $Username = $_POST["Username"];
     $Password = $_POST["Password"];
     $Gender = $_POST["Gender"];
-	$Birthday = $_POST["Birthday"];
-	$Number = $_POST["Number"];
+    $Birthday = $_POST["Birthday"];
+    $Number = $_POST["Number"];
     $Email = $_POST["Email"];
-
-    // Connect to MongoDB Atlas
-    $client = new Client($mongoURI);
-
-    // Select the database and collection
-    $db = $client->$dbName;
-    $collection = $db->$collectionName;
 
     // Upload profile picture
     $targetFile = $targetDir . basename($_FILES["Data"]["name"]);
 
-    if (move_uploaded_file($_FILES["Data"]["tmp_name"], $targetFile)) {
-        // Read the uploaded picture as binary
-        $binaryData = new Binary(file_get_contents($targetFile), Binary::TYPE_GENERIC);
+    if ($_FILES["Data"]["error"] == UPLOAD_ERR_OK) {
+        $tmp_name = $_FILES["Data"]["tmp_name"];
+        $imageData = file_get_contents($tmp_name);
+        $mimeType = mime_content_type($tmp_name);
 
-        // Insert user data with the profile picture as binary data
-        $insertResult = $collection->insertOne([
-            "Fullname" => $Fullname,
-            "ProfilenName" => $Filename,
-            "File" => $binaryData,
-            "Address" => $Address,
-            "Username" => $Username,
-            "Password" => $Password,
-            "Gender" => $Gender,
-            "Birthday" => $Birthday,
-            "ContactNum" => $Number,
-            "Email" => $Email
-        ]);
+        // Check if the uploaded file is an image
+        if (strpos($mimeType, 'image') !== false) {
+            // Convert image data to binary
+            $binaryData = new MongoDB\BSON\Binary($imageData, MongoDB\BSON\Binary::TYPE_GENERIC);
 
-        if ($insertResult->getInsertedCount() > 0) {
-            $success_message = "Registration successful!";
+            try {
+                // Connect to MongoDB Atlas
+                $client = new Client($mongoURI);
 
+                // Select the database and collection
+                $db = $client->$dbName;
+                $collection = $db->$collectionName;
+
+                // Insert user data with the profile picture as binary data
+                $insertResult = $collection->insertOne([
+                    "Fullname" => $Fullname,
+                    "ProfilenName" => $Filename,
+                    "File" => $binaryData,
+                    "Address" => $Address,
+                    "Username" => $Username,
+                    "Password" => $Password,
+                    "Gender" => $Gender,
+                    "Birthday" => $Birthday,
+                    "ContactNum" => $Number,
+                    "Email" => $Email
+                ]);
+
+                if ($insertResult->getInsertedCount() > 0) {
+                    $success_message = "Registration successful!";
+                } else {
+                    // Registration failed, set an error message
+                    $error_message = "Registration failed. Please try again.";
+                }
+
+                // Remove the uploaded file since it's already stored as binary data
+                unlink($targetFile);
+            } catch (Exception $e) {
+                // Catch any exceptions and log the error message
+                $error_message = "MongoDB Error: " . $e->getMessage();
+            }
         } else {
-            // Registration failed, set an error message
-            $error_message = "Registration failed. Please try again.";
+            $error_message = "Please upload an image file.";
         }
-
-        // Remove the uploaded file since it's already stored as binary data
-        unlink($targetFile);
     } else {
-        // Error uploading profile picture
-        $error_message = "Error uploading profile picture.";
+        $error_message = "Error uploading file: " . $_FILES["Data"]["error"];
     }
 }
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
