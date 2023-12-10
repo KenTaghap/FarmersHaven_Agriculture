@@ -15,37 +15,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dbName = "Agriculture"; // Replace with your database name
     $collectionName = "Farmers_Validate";
 
-    // Create the "uploads" directory if it doesn't exist
-    $targetDir = "uploads/";
-    if (!file_exists($targetDir)) {
-        mkdir($targetDir, 0777, true); // Create the directory recursively
-    }
+    try {
+        // Connect to MongoDB Atlas
+        $client = new Client($mongoURI);
 
-    // Retrieve user data from the form
-    $Fullname = $_POST["Fullname"];
-    $Filename = $_POST["Filename"];
+        // Select the database and collection
+        $db = $client->$dbName;
+        $collection = $db->$collectionName;
 
-	$Address = $_POST["Address"];
-	$Username = $_POST["Username"];
-    $Password = $_POST["Password"];
-    $Gender = $_POST["Gender"];
-	$Birthday = $_POST["Birthday"];
-	$Number = $_POST["Number"];
-    $Email = $_POST["Email"];
-
-    // Connect to MongoDB Atlas
-    $client = new Client($mongoURI);
-
-    // Select the database and collection
-    $db = $client->$dbName;
-    $collection = $db->$collectionName;
-
-    // Upload profile picture
-    $targetFile = $targetDir . basename($_FILES["Data"]["name"]);
-
-    if (move_uploaded_file($_FILES["Data"]["tmp_name"], $targetFile)) {
-        // Read the uploaded picture as binary
-        $binaryData = new Binary(file_get_contents($targetFile), Binary::TYPE_GENERIC);
+        // ... (rest of your code)
 
         // Insert user data with the profile picture as binary data
         $insertResult = $collection->insertOne([
@@ -63,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($insertResult->getInsertedCount() > 0) {
             $success_message = "Registration successful!";
-
         } else {
             // Registration failed, set an error message
             $error_message = "Registration failed. Please try again.";
@@ -71,12 +48,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Remove the uploaded file since it's already stored as binary data
         unlink($targetFile);
-    } else {
-        // Error uploading profile picture
-        $error_message = "Error uploading profile picture.";
+    } catch (Exception $e) {
+        // Catch any exceptions and log the error message
+        $error_message = "MongoDB Error: " . $e->getMessage();
     }
 }
 ?>
+
 
 
 
