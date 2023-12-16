@@ -3,7 +3,7 @@
 require 'vendor/autoload.php';
 
 
-
+error_reporting(E_ERROR | E_PARSE);
 use MongoDB\Client;
 
 // MongoDB Atlas connection string
