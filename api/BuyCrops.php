@@ -1,6 +1,6 @@
 <?php
 require 'vendor/autoload.php'; // Load Composer's autoloader
-
+error_reporting(E_ERROR | E_PARSE);
 
 // MongoDB connection configuration
 $mongoURI = "mongodb://kenUser:KenPassword@ac-kvsfcpt-shard-00-00.qrj9egp.mongodb.net:27017,ac-kvsfcpt-shard-00-01.qrj9egp.mongodb.net:27017,ac-kvsfcpt-shard-00-02.qrj9egp.mongodb.net:27017/Agriculture?ssl=true&replicaSet=atlas-4pn5vh-shard-0&authSource=admin&retryWrites=true&w=majority";
