@@ -1,6 +1,6 @@
 <?php
 require 'vendor/autoload.php';
-
+error_reporting(E_ERROR | E_PARSE);
 use MongoDB\Client;
 
 // Replace with your MongoDB Atlas connection string
