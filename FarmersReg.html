@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Farmer Register</title>
+    <link rel="stylesheet" href="css/regstyle.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+      .error-label {
+          color: red;
+      }
+      .success-label {
+          color: green;
+      }
+  </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>Farmers <br>Signup Form</header>
+      <br><label id="error-label" class="error-label"></label><br>
+      <label id="success-label" class="success-label"></label><br>
+
+      <div class="progress-bar">
+        <div class="step">
+          <p>Name</p>
+          <div class="bullet">
+            <span>1</span>
+          </div>
+          <div class="check fas fa-check"></div>
+        </div>
+        <div class="step">
+          <p>Info</p>
+          <div class="bullet">
+            <span>2</span>
+          </div>
+          <div class="check fas fa-check"></div>
+        </div>
+        <div class="step">
+          <p>Birth</p>
+          <div class="bullet">
+            <span>3</span>
+          </div>
+          <div class="check fas fa-check"></div>
+        </div>
+        <div class="step">
+          <p>Account</p>
+          <div class="bullet">
+            <span>4</span>
+          </div>
+          <div class="check fas fa-check"></div>
+        </div>
+      </div>
+      <div class="form-outer">
+
+        <form action="api/FarmersRegphp.php" method="POST" enctype="multipart/form-data">
+          <div class="page slide-page">
+            <div class="title">Basic Info:</div>
+            <div class="field">
+              <div class="label">Fullname</div>
+              <input type="text" name="Fullname" id="Fullname" required>
+            </div>
+            <div class="field">
+              <div class="label">Profile</div>
+              <input type="text" id="Filename"  name="Filename" readonly required>
+            </div>
+            <input type="file" id="Data" accept="image/*" name="Data">
+            <div class="field">
+              <button class="firstNext next">Next</button>
+            </div>
+          </div>
+
+          <div class="page">
+            <div class="title">Other Information:</div>
+            <div class="field">
+              <div class="label">Address</div>
+              <input type="text" name="Address" id="Address" required>
+            </div>
+            <div class="field">
+              <div class="label">Email Address</div>
+              <input type="text" name="Email" id="Email" required>
+            </div>
+            <div class="field">
+              <div class="label">Phone Number</div>
+              <input type="Number" name="Number" id="Number" required>
+            </div>
+            <div class="field btns">
+              <button class="prev-1 prev">Previous</button>
+              <button class="next-1 next">Next</button>
+            </div>
+          </div>
+
+          <div class="page">
+            <div class="title">Date of Birth:</div>
+            <div class="field">
+              <div class="label">Date</div>
+              <input type="date" name="Birthday" id="Birthday" required>
+            </div>
+            <div class="field">
+              <div class="label">Gender</div>
+              <select name="Gender" id="Gender" required>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field btns">
+              <button class="prev-2 prev">Previous</button>
+              <button class="next-2 next">Next</button>
+            </div>
+          </div>
+
+          <div class="page">
+            <div class="title">Login Details:</div>
+            <div class="field">
+              <div class="label">Username</div>
+              <input type="text" name="Username" id="Username" required>
+            </div>
+            <div class="field">
+              <div class="label">Password</div>
+              <input type="password" name="Password" id="Password" required>
+            </div>
+            <div class="field btns">
+              <button class="prev-3 prev">Previous</button>
+              <button class="submit">Submit</button>
+            </div>
+          </div>
+        </form>
+
+        <script>
+          document.getElementById('Data').addEventListener('change', function() {
+              var input = this;
+              var filenameTextbox = document.getElementById('Filename');
+              
+              if (input.files.length > 0) {
+                  filenameTextbox.value = input.files[0].name;
+              } else {
+                  filenameTextbox.value = '';
+              }
+          });
+
+         
+      </script>
+        <div class="text sign-up-text">Already have an account? <a href="FarmersLogin.html">Log-in Now</a></div>
+      </div>
+      
+    </div>
+    <script src="css/script.js"></script>
+
+  </body>
+</html>
