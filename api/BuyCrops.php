@@ -367,7 +367,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <!-- Search form -->
         <!-- Search form -->
         <form action="" method="GET">
-            <label for="search">Username:</label>
+            <label for="search">Products Name:</label>
             <input type="text" id="search" name="search" placeholder="None" value="<?php echo htmlspecialchars($searchTerm); ?>">
             <input type="submit" value="Display">
         </form>
