@@ -36,16 +36,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Upload profile picture
     $targetFile = $targetDir . basename($_FILES["Data"]["name"]);
+    $targetFileProof = $targetDir . basename($_FILES["DataProof"]["name"]);
+
 
     if ($_FILES["Data"]["error"] == UPLOAD_ERR_OK) {
         $tmp_name = $_FILES["Data"]["tmp_name"];
         $imageData = file_get_contents($tmp_name);
         $mimeType = mime_content_type($tmp_name);
 
+        $tmp_Proof = $_FILES["DataProof"]["tmp_name"];
+        $imageDataProof = file_get_contents($tmp_Proof);
+        $mimeTypeProof = mime_content_type($tmp_Proof);
+
         // Check if the uploaded file is an image
         if (strpos($mimeType, 'image') !== false) {
             // Convert image data to binary
             $binaryData = new MongoDB\BSON\Binary($imageData, MongoDB\BSON\Binary::TYPE_GENERIC);
+            $binaryDataProof = new MongoDB\BSON\Binary($imageDataProof, MongoDB\BSON\Binary::TYPE_GENERIC);
 
             try {
                 // Connect to MongoDB Atlas
@@ -66,7 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     "Gender" => $Gender,
                     "Birthday" => $Birthday,
                     "ContactNum" => $Number,
-                    "Email" => $Email
+                    "Email" => $Email,
+                    "Proof" => $binaryDataProof
                 ]);
 
                 if ($insertResult->getInsertedCount() > 0) {
