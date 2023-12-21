@@ -119,6 +119,12 @@
               <div class="label">Password</div>
               <input type="password" name="Password" id="Password" required>
             </div>
+            <div class="field">
+              <div class="label">Submit Your Proof</div>
+              <input type="text" id="Proof"  name="Proof" readonly required>
+            </div>
+            <input type="file" id="DataProof" accept="image/*" name="DataProof">
+
             <div class="field btns">
               <button class="prev-3 prev">Previous</button>
               <button class="submit">Submit</button>
@@ -138,7 +144,17 @@
               }
           });
 
-         
+          document.getElementById('DataProof').addEventListener('change', function() {
+              var input = this;
+              var filenameTextbox = document.getElementById('Proof');
+              
+              if (input.files.length > 0) {
+                  filenameTextbox.value = input.files[0].name;
+              } else {
+                  filenameTextbox.value = '';
+              }
+          });
+
       </script>
         <div class="text sign-up-text">Already have an account? <a href="FarmersLogin.html">Log-in Now</a></div>
       </div>
